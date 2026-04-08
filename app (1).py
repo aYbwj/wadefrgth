@@ -54,21 +54,21 @@ def ask_llama(temp, wear, sensor):
 with gr.Blocks() as demo:
     gr.Markdown("<h1 style='text-align: center;'>🏭 Industrial AI Command Center</h1>")
     gr.Markdown("<p style='text-align: center;'>Real-time telemetry and predictive maintenance powered by <b>Meta Llama 3.1</b></p>")
-    
+
     with gr.Row():
         with gr.Column(scale=1):
             gr.Markdown("### 📡 Live Sensor Feed")
             status_btn = gr.Button("Fetch Live Telemetry", variant="primary")
-            
+
             with gr.Group():
                 temp_disp = gr.Textbox(label="Core Temperature")
                 wear_disp = gr.Textbox(label="Mechanical Wear Level")
                 sensor_disp = gr.Textbox(label="Sensor Status")
-            
+
             h_temp = gr.Number(visible=False)
             h_wear = gr.Number(visible=False)
             h_sensor = gr.Textbox(visible=False)
-            
+
         with gr.Column(scale=2):
             gr.Markdown("### 🧠 Llama 3.1 Diagnostic Engine")
             explain_btn = gr.Button("Generate AI Maintenance Report")
@@ -77,4 +77,5 @@ with gr.Blocks() as demo:
     status_btn.click(fetch_telemetry, outputs=[temp_disp, wear_disp, sensor_disp, h_temp, h_wear, h_sensor])
     explain_btn.click(ask_llama, inputs=[h_temp, h_wear, h_sensor], outputs=advice_out)
 
-app = gr.mount_gradio_app(FastAPI(), demo, path="/")
+# ✅ Mount Gradio on /ui, keeping /reset /step /state intact
+app = gr.mount_gradio_app(app, demo, path="/ui")
