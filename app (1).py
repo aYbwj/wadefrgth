@@ -18,19 +18,17 @@ env = CyberPhysicalEnv()
 
 # FastAPI Endpoints
 @app.post("/reset")
-@app.get("/reset") # This allows both types just in case
-def reset():
-    obs = env.reset()
-    return obs # Ensure it returns the observation object directly
+async def reset():
+    return env.reset()
 
 @app.post("/step")
-def step(action: FactoryAction):
-    # Ensure this is exactly as written before
+async def step(action: FactoryAction):
     obs, reward, done = env.step(action)
     return {"observation": obs, "reward": reward, "done": done}
+
 @app.get("/state")
-def get_state():
-    return env.get_state() if hasattr(env, 'get_state') else {}
+async def get_state():
+    return env.get_state()
 
 # UI Functions
 def fetch_telemetry():
