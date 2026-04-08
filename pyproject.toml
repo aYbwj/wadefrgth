@@ -12,7 +12,8 @@ dependencies = [
     "gradio",
     "openai",
     "uvicorn",
+    "openenv-core>=0.2.0",
 ]
 
 [project.scripts]
-start = "app:app"
+server = "server.app:app"
