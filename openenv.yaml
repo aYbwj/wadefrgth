@@ -1,0 +1,8 @@
+name: Factory_Maintenance_AI
+version: "1.0.0"
+entry_point: app:app
+env_type: cyber-physical
+endpoints:
+  reset: /reset
+  step: /step
+  state: /state
