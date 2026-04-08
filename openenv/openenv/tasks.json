@@ -1,0 +1,17 @@
+[
+  {
+    "task_id": "task_1_overheat",
+    "description": "Temperature is critically high. Prevent engine meltdown.",
+    "ideal_action": "cool_down"
+  },
+  {
+    "task_id": "task_2_wear",
+    "description": "Mechanical wear level is above safe thresholds.",
+    "ideal_action": "replace_parts"
+  },
+  {
+    "task_id": "task_3_sensor_error",
+    "description": "Sensor is showing offline or erratic behavior.",
+    "ideal_action": "calibrate_sensor"
+  }
+]
