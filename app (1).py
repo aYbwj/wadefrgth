@@ -17,7 +17,7 @@ client = OpenAI(base_url=API_BASE_URL, api_key=HF_TOKEN)
 env = CyberPhysicalEnv()
 
 # FastAPI Endpoints
-@app.get("/reset")
+@app.post("/reset")
 def reset():
     return env.reset()
 
