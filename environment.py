@@ -13,24 +13,23 @@ class CyberPhysicalEnv:
         }
         return self.state
 
-    def step(self, action: FactoryAction):
-        # Base reward logic scaled 0.0 to 1.0
-        if action.action_type == "cool_down":
-            self.state["reported_temperature"] = 70.0
-            reward = 1.0 if self.state["reported_temperature"] > 90.0 else 0.5
-        elif action.action_type == "replace_parts":
-            self.state["wear_level"] = 0.0
-            reward = 1.0 if self.state["wear_level"] > 0.5 else 0.5
-        elif action.action_type == "calibrate_sensor":
-            self.state["sensor_health"] = "Online"
-            reward = 1.0 if self.state["sensor_health"] != "Online" else 0.5
-        elif action.action_type == "run_diagnostic":
-            reward = 0.8
-        else:
-            reward = 0.0 
+   def step(self, action: FactoryAction):
+    if action.action_type == "cool_down":
+        reward = 1.0 if self.state["reported_temperature"] > 90.0 else 0.5  # check BEFORE
+        self.state["reported_temperature"] = 70.0
+    elif action.action_type == "replace_parts":
+        reward = 1.0 if self.state["wear_level"] > 0.5 else 0.5  # check BEFORE
+        self.state["wear_level"] = 0.0
+    elif action.action_type == "calibrate_sensor":
+        reward = 1.0 if self.state["sensor_health"] != "Online" else 0.5  # check BEFORE
+        self.state["sensor_health"] = "Online"
+    elif action.action_type == "run_diagnostic":
+        reward = 0.8
+    else:
+        reward = 0.0
 
-        done = False 
-        return self.state, reward, done
+    done = False
+    return self.state, reward, done
 
     def get_state(self):
         return self.state
